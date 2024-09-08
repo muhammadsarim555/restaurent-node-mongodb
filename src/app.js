@@ -4,37 +4,15 @@ require("./db/mongoose");
 
 const Product = require("./models/product.js");
 const Category = require("./models/category.js");
-var ObjectId = require("mongodb").ObjectID;
+
+const userRouter = require("./routes/user.Routes.js");
 
 const app = express();
 
 app.use(express.json());
+app.use("/api/v1/user", userRouter);
 
 const port = process.env.PORT;
-
-const catObj = new Category({
-  name: "Pizza",
-  imageUrl:
-    "https://demo2.pavothemes.com/poco/wp-content/uploads/2020/08/category3.png",
-});
-
-const addProduct = async () => {
-  const catRes = await catObj.save();
-  const product1 = new Product({
-    name: "Italino Pizza",
-    price: 800,
-    featured: true,
-    description: "Italino Pizza Original from Italia",
-    category: catRes._id,
-    rating: 4.9,
-  });
-
-  product1
-    .save()
-    .then((savedProduct) => console.log("Product added:", savedProduct))
-    .catch((err) => console.error("Error adding product:", err.message));
-};
-// addProduct();
 
 // post routes
 app.post("/create-category", async (req, res) => {
