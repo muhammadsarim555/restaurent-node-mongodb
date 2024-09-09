@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
       token,
       process.env.SECRET_KEY || "1234!@#%<{*&)"
     );
-    req.user = decoded.user;
+    req.user = decoded;
     next();
   } catch (e) {
     console.error(e);
