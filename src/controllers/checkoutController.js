@@ -13,7 +13,9 @@ exports.createChekout = async (req, res) => {
 exports.getCheckoutFromUser = async (req, res) => {
   const userCheckout = await Checkout.find({
     userId: new ObjectId(req?.user?.userId),
-  }).populate("userId");
+  })
+    .populate("userId")
+    .populate("products");
 
   res.send(userCheckout);
 };

@@ -16,9 +16,11 @@ const checkoutSchema = new Schema({
     type: String,
     required: true,
   },
-  products: {
-    type: Array,
-  },
+  products: [{
+    type: SchemaTypes.ObjectId,
+    ref: "Product",
+    required: true,
+  }],
   paymentType: {
     type: String,
     default: "COD",
